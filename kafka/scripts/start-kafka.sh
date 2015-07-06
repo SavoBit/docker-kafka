@@ -26,12 +26,12 @@ fi
 # Set the zookeeper chroot
 if [ ! -z "$ZK_CHROOT" ]; then
     # wait for zookeeper to start up
-    until /usr/share/zookeeper/bin/zkServer.sh status; do
+    until $ZOOKEEPER_HOME/bin/zkServer.sh status; do
       sleep 0.1
     done
 
     # create the chroot node
-    echo "create /$ZK_CHROOT \"\"" | /usr/share/zookeeper/bin/zkCli.sh || {
+    echo "create /$ZK_CHROOT \"\"" | $ZOOKEEPER_HOME/bin/zkCli.sh || {
         echo "can't create chroot in zookeeper, exit"
         exit 1
     }
