@@ -26,8 +26,8 @@ ENV KAFKA_RELEASE kafka_$SCALA_VERSION-$KAFKA_VERSION
 RUN wget -q -P /tmp http://mirrors.koehn.com/apache/kafka/$KAFKA_VERSION/$KAFKA_RELEASE.tgz
 RUN tar xfz /tmp/$KAFKA_RELEASE.tgz -C /opt && rm /tmp/$KAFKA_RELEASE.tgz
 ENV KAFKA_HOME /opt/$KAFKA_RELEASE
-# Need this to be able to access kafka from outside the container
-ENV ADVERTISED_HOST 0.0.0.0
+# NOTE: You need to run this image with -h kafka for this to work
+ENV ADVERTISED_HOST kafka
 
 ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
 
